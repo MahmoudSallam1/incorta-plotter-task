@@ -1,6 +1,7 @@
-import AppSidebar from "../components/AppSidebar";
-import AppContent from "../components/AppContent";
-import AppHeader from "../components/AppHeader";
+import AppSidebar from "../components/layout/AppSidebar";
+import AppContent from "../components/layout/AppContent";
+import AppHeader from "../components/layout/AppHeader";
+import AppFooter from "../components/layout/AppFooter";
 
 function AppLayout() {
   return (
@@ -10,6 +11,7 @@ function AppLayout() {
         <AppSidebar />
         <AppContent />
       </div>
+      <AppFooter />
     </div>
   );
 }
