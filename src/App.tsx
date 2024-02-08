@@ -1,9 +1,9 @@
-import "./App.css";
+import Layout from "./layout/Layout";
 
 function App() {
   return (
     <>
-      <div> Incorat plotter...</div>
+      <Layout />
     </>
   );
 }
