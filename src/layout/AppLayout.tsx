@@ -1,9 +1,8 @@
-import React from "react";
 import AppSidebar from "../components/AppSidebar";
 import AppContent from "../components/AppContent";
 import AppHeader from "../components/AppHeader";
 
-function Layout() {
+function AppLayout() {
   return (
     <div className="flex flex-col h-screen">
       <AppHeader />
@@ -15,4 +14,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default AppLayout;
