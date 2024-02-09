@@ -1,15 +1,13 @@
-import AppSidebar from "../components/layout/AppSidebar";
-import AppContent from "../components/layout/AppContent";
 import AppHeader from "../components/layout/AppHeader";
 import AppFooter from "../components/layout/AppFooter";
+import AppPlotter from "../plotter/AppPlotter";
 
 function AppLayout() {
   return (
     <div className="flex flex-col h-screen">
       <AppHeader />
       <div className="flex flex-1">
-        <AppSidebar />
-        <AppContent />
+        <AppPlotter />
       </div>
       <AppFooter />
     </div>

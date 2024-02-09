@@ -1,4 +1,6 @@
-export const columns = [
+import { DataColumn } from "../models/DataColumn";
+
+export const columns: DataColumn[] = [
   { name: "Product", function: "dimension" },
   { name: "Year", function: "dimension" },
   { name: "Country", function: "dimension" },
