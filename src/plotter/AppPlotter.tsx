@@ -31,12 +31,14 @@ function AppPlotter() {
     const column = columns.find((item) => item.name === columnName);
 
     if (column) {
+      // drag to dimensions
       if (
         result.destination.droppableId === "dimensions" &&
         column.function === "dimension"
       ) {
         setDimensions([...dimensions, column]);
         setColumns(columns.filter((col) => col.name !== columnName));
+        // drag to measure
       } else if (
         result.destination.droppableId === "measures" &&
         column.function === "measure"
@@ -44,8 +46,8 @@ function AppPlotter() {
         setMeasures([...measures, column]);
         setColumns(columns.filter((col) => col.name !== columnName));
       } else {
-        // If dragged to the wrong drop zone, revert the changes
-        setColumns(columns); // Restore the columns
+        //drag to the wrong drop zone, revert the changes
+        setColumns(columns);
       }
     }
   };
@@ -56,7 +58,7 @@ function AppPlotter() {
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <main className="flex flex-1">
+      <main className="flex flex-1 flex-col lg:flex-row">
         <PlotterSideColumnsComponent columns={columns} />
         <div className="w-full">
           <PlotterDimensionComponent
