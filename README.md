@@ -6,11 +6,11 @@ The Incorta Data Visualization App is a frontend application that enables users 
 
 ## Features
 
-- Drag and drop dimension columns into the "Dimension" box.
-- Drag and drop measure columns into the "Measures" box.
-- Limit of one column per dimension box and multiple columns per measures box.
-- Clear functionality to reset both the "Dimension" and "Measures" boxes.
-- Automatic generation of a line chart when both boxes are filled.
+[✔] Drag and drop dimension columns into the "Dimension" box.
+[✔] Drag and drop measure columns into the "Measures" box.
+[✔] Limit of one column per dimension box and multiple columns per measures box.
+[✔] Clear functionality to reset both the "Dimension" and "Measures" boxes.
+[✔] Automatic generation of a line chart when both boxes are filled.
 
 ## Technologies Used
 
@@ -53,5 +53,5 @@ yarn dev
 ```
 ### Contact Me
 
-For inquiries or support, please contact our team at hi@msallam.me
+For inquiries or support, please contact me at hi@msallam.me
 
