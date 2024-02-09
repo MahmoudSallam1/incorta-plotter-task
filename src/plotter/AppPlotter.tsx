@@ -7,6 +7,7 @@ import PlotterMeasureComponent from "./PlotterMeasureComponent";
 import PlotterVisualizerComponent from "./PlotterVisualizerComponent";
 import { PlotterAPI } from "../network/api/PlotterAPI";
 import { DataItem } from "../models/DataItem";
+import { PlotterConst } from "../constants";
 
 function AppPlotter() {
   const [dimensions, setDimensions] = useState<DataColumn[]>([]);
@@ -35,15 +36,15 @@ function AppPlotter() {
     if (column) {
       // drag to dimensions
       if (
-        result.destination.droppableId === "dimensions" &&
-        column.function === "dimension"
+        result.destination.droppableId === PlotterConst.DIMENSION &&
+        column.function === PlotterConst.DIMENSION
       ) {
         setDimensions([...dimensions, column]);
         setColumns(columns.filter((col) => col.name !== columnName));
         // drag to measure
       } else if (
-        result.destination.droppableId === "measures" &&
-        column.function === "measure"
+        result.destination.droppableId === PlotterConst.MEASURE &&
+        column.function === PlotterConst.MEASURE
       ) {
         setMeasures([...measures, column]);
         setColumns(columns.filter((col) => col.name !== columnName));
@@ -71,8 +72,6 @@ function AppPlotter() {
       .then((data) => {
         setData(data);
         setLoading(false);
-        console.log(data);
-        
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

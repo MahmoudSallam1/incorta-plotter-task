@@ -1,6 +1,7 @@
 import { Droppable } from "react-beautiful-dnd";
 import { DataColumn } from "../models/DataColumn";
 import { AppDeleteButton } from "../components/ui/AppButton";
+import { PlotterConst } from "../constants";
 
 interface PlotterDimensionProps {
   dimensions: DataColumn[];
@@ -13,7 +14,7 @@ function PlotterDimensionComponent({
   return (
     <div className="flex flex-col lg:flex-row lg:items-center w-full p-4">
       <Droppable
-        droppableId="dimensions"
+        droppableId={PlotterConst.DIMENSION}
         isDropDisabled={dimensions.length > 0}
       >
         {(provided, snapshot) => (
