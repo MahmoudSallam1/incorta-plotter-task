@@ -8,6 +8,7 @@ import PlotterVisualizerComponent from "./PlotterVisualizerComponent";
 import { PlotterAPI } from "../network/api/PlotterAPI";
 import { DataItem } from "../models/DataItem";
 import { PlotterConst } from "../constants";
+import AppErrorCard from "../components/ui/AppErrorCard";
 
 function AppPlotter() {
   const [dimensions, setDimensions] = useState<DataColumn[]>([]);
@@ -15,6 +16,7 @@ function AppPlotter() {
   const [columns, setColumns] = useState<DataColumn[]>([]);
   const [data, setData] = useState<DataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   const handleClearDimensions = () => {
     setColumns([...columns, ...dimensions]);
@@ -62,6 +64,7 @@ function AppPlotter() {
         setLoading(false);
       })
       .catch((error) => {
+        setError("Failed to fetch columns. Please try again later.");
         console.error("Error fetching columns:", error);
         setLoading(false);
       });
@@ -74,7 +77,8 @@ function AppPlotter() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        setError("Failed to fetch data. Please try again later.");
+        console.error("Error fetching columns:", error);
         setLoading(false);
       });
   }, []);
@@ -83,21 +87,24 @@ function AppPlotter() {
     <DragDropContext onDragEnd={handleDragEnd}>
       <main className="flex flex-1 flex-col lg:flex-row">
         <PlotterSideColumnsComponent columns={columns} loading={loading} />
-        <div className="w-full">
-          <PlotterDimensionComponent
-            dimensions={dimensions}
-            handleClearDimensions={handleClearDimensions}
-          />
-          <PlotterMeasureComponent
-            measures={measures}
-            handleClearMeasures={handleClearMeasures}
-          />
-          <PlotterVisualizerComponent
-            dimensions={dimensions}
-            measures={measures}
-            data={data}
-          />
-        </div>
+        {error && <AppErrorCard message={error} />}
+        {!loading && !error && (
+          <div className="w-full">
+            <PlotterDimensionComponent
+              dimensions={dimensions}
+              handleClearDimensions={handleClearDimensions}
+            />
+            <PlotterMeasureComponent
+              measures={measures}
+              handleClearMeasures={handleClearMeasures}
+            />
+            <PlotterVisualizerComponent
+              dimensions={dimensions}
+              measures={measures}
+              data={data}
+            />
+          </div>
+        )}
       </main>
     </DragDropContext>
   );

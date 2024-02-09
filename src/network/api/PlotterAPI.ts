@@ -5,17 +5,30 @@ import { DataItem } from "../../models/DataItem";
 
 export class PlotterAPI {
   static async listColumns(): Promise<DataColumn[]> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(columns);
-      }, 500);
-    });
+    try {
+      const response = await new Promise<DataColumn[]>((resolve) => {
+        setTimeout(() => {
+          resolve(columns);
+        }, 500);
+      });
+      return response;
+    } catch (error) {
+      console.error("Error fetching columns:", error);
+      throw new Error("Failed to fetch columns");
+    }
   }
+
   static async listData(): Promise<DataItem[]> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(data);
-      }, 500);
-    });
+    try {
+      const response = await new Promise<DataItem[]>((resolve) => {
+        setTimeout(() => {
+          resolve(data);
+        }, 500);
+      });
+      return response;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw new Error("Failed to fetch data");
+    }
   }
 }
