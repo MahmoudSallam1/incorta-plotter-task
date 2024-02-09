@@ -18,7 +18,7 @@ function PlotterMeasureComponent({
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className={`border-dashed border-2 border-gray-300 p-4 m-4 lg:mr-0 lg:mb-4 lg:flex-1 ${
+            className={`border-dashed border-2 border-gray-300 p-4  lg:mr-0  lg:flex-1 ${
               snapshot.isDraggingOver ? "border-gray-500" : ""
             } ${measures.length > 0 ? "bg-gray-200" : ""}`}
           >
