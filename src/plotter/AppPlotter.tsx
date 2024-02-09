@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-
-import { columns as columnsData } from "../data/columns";
 import { DataColumn } from "../models/DataColumn";
 import PlotterSideColumnsComponent from "./PlotterSideColumnsComponent";
 import { DragDropContext } from "react-beautiful-dnd";
 import PlotterDimensionComponent from "./PlotterDimensionComponent";
 import PlotterMeasureComponent from "./PlotterMeasureComponent";
 import PlotterVisualizerComponent from "./PlotterVisualizerComponent";
+import { PlotterAPI } from "../network/api/PlotterAPI";
 
 function AppPlotter() {
   const [dimensions, setDimensions] = useState<DataColumn[]>([]);
   const [measures, setMeasures] = useState<DataColumn[]>([]);
   const [columns, setColumns] = useState<DataColumn[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const handleClearDimensions = () => {
     setColumns([...columns, ...dimensions]);
@@ -53,13 +53,21 @@ function AppPlotter() {
   };
 
   useEffect(() => {
-    setColumns(columnsData);
+    PlotterAPI.listColumns()
+      .then((data) => {
+        setColumns(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching columns:", error);
+        setLoading(false);
+      });
   }, []);
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <main className="flex flex-1 flex-col lg:flex-row">
-        <PlotterSideColumnsComponent columns={columns} />
+        <PlotterSideColumnsComponent columns={columns} loading={loading} />
         <div className="w-full">
           <PlotterDimensionComponent
             dimensions={dimensions}
