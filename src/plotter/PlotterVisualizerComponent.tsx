@@ -36,9 +36,9 @@ function PlotterVisualizerComponent({
     return entry;
   });
   return (
-    <div className="flex flex-col items-center w-full p-4 mb-4">
+    <div className="flex flex-col items-center w-full p-4 mb-4 overflow-x-auto">
       {dimensions.length > 0 && measures.length > 0 && (
-        <LineChart width={800} height={400} data={chartData}>
+        <LineChart width={800} height={300} data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey={dimensions[0].name} />
           <YAxis />

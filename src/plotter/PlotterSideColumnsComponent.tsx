@@ -7,7 +7,7 @@ interface PlotterSideColumnsProps {
 
 function PlotterSideColumnsComponent({ columns }: PlotterSideColumnsProps) {
   return (
-    <div className="bg-white w-full lg:w-1/4 h-full border-r p-4">
+    <div className="bg-gray-100 w-full lg:w-1/4 h-full border-r p-4">
       <Droppable droppableId="columns">
         {(provided) => (
           <div
@@ -28,7 +28,7 @@ function PlotterSideColumnsComponent({ columns }: PlotterSideColumnsProps) {
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    className={`relative border border-gray-300 p-4 rounded-md shadow-md cursor-move transition duration-300 ease-in-out ${
+                    className={`relative border border-gray-300 bg-white p-4 rounded-md shadow-md cursor-move transition duration-300 ease-in-out ${
                       snapshot.isDragging
                         ? "border-blue-500"
                         : "hover:border-blue-500"

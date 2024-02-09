@@ -28,7 +28,7 @@ function PlotterDimensionComponent({
             {dimensions.map((column: DataColumn) => (
               <div
                 key={column.name}
-                className={`relative bg-blue-500 text-white w-1/6 border border-gray-300 p-4 rounded-md shadow-md cursor-move transition duration-300 ease-in-out 
+                className={`relative bg-blue-500 text-white w-full lg:w-1/6 border border-gray-300 p-4 rounded-md shadow-md cursor-move transition duration-300 ease-in-out 
                   border-blue-500 hover:border-blue-500 hover:border-2 mt-2`}
               >
                 {column.name}
