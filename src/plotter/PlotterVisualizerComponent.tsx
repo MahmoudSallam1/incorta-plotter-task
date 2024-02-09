@@ -38,12 +38,7 @@ function PlotterVisualizerComponent({
   return (
     <div className="flex flex-col items-center w-full p-4 mb-4">
       {dimensions.length > 0 && measures.length > 0 && (
-        <LineChart
-          width={800}
-          height={400}
-          data={chartData}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
+        <LineChart width={800} height={400} data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey={dimensions[0].name} />
           <YAxis />
