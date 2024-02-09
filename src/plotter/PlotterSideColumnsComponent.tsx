@@ -56,6 +56,20 @@ function PlotterSideColumnsComponent({
                             } mt-2`}
                           >
                             {column.name}
+                            <div className="absolute top-0 right-0 mt-1.5 mr-1 flex flex-col">
+                              <div className="flex">
+                                <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+                                <div className="w-1 h-1 bg-gray-400 rounded-full ml-1"></div>
+                              </div>
+                              <div className="flex mt-0.5">
+                                <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+                                <div className="w-1 h-1 bg-gray-400 rounded-full ml-1"></div>
+                              </div>
+                              <div className="flex mt-0.5">
+                                <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+                                <div className="w-1 h-1 bg-gray-400 rounded-full ml-1"></div>
+                              </div>
+                            </div>
                           </div>
                         )}
                       </Draggable>
@@ -87,6 +101,20 @@ function PlotterSideColumnsComponent({
                             } mt-2`}
                           >
                             {column.name}
+                            <div className="absolute top-0 right-0 mt-1.5 mr-1 flex flex-col">
+                              <div className="flex">
+                                <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+                                <div className="w-1 h-1 bg-gray-400 rounded-full ml-1"></div>
+                              </div>
+                              <div className="flex mt-0.5">
+                                <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+                                <div className="w-1 h-1 bg-gray-400 rounded-full ml-1"></div>
+                              </div>
+                              <div className="flex mt-0.5">
+                                <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+                                <div className="w-1 h-1 bg-gray-400 rounded-full ml-1"></div>
+                              </div>
+                            </div>
                           </div>
                         )}
                       </Draggable>
