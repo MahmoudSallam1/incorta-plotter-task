@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { columns as columnsData } from "../data/columns";
 import { DataColumn } from "../models/DataColumn";

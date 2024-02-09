@@ -1,5 +1,3 @@
-import React from "react";
-
 import {
   LineChart,
   Line,
@@ -22,7 +20,7 @@ function PlotterVisualizerComponent({
   measures,
 }: PlotterVisualizerProps) {
   const chartData = data[0].values.map((_, index) => {
-    const entry: any = {}; // You might want to specify a more specific type for 'entry'
+    const entry = {}; // You might want to specify a more specific type for 'entry'
     dimensions.forEach((dim) => {
       const dimData = data.find((item) => item.name === dim.name);
       if (dimData) {
