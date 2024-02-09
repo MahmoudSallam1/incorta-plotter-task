@@ -1,4 +1,3 @@
-import React from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { DataColumn } from "../models/DataColumn";
 
@@ -18,7 +17,7 @@ function PlotterSideColumnsComponent({ columns }: PlotterSideColumnsProps) {
             style={{ minHeight: "100px" }}
           >
             <h2 className="text-lg font-semibold mb-2">Columns</h2>
-            {columns.map((column, index) => (
+            {columns.map((column: DataColumn, index: number) => (
               <Draggable
                 key={column.name}
                 draggableId={column.name}

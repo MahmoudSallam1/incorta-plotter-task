@@ -6,9 +6,7 @@ function AppLayout() {
   return (
     <div className="flex flex-col h-screen">
       <AppHeader />
-      <div className="flex flex-1">
-        <AppPlotter />
-      </div>
+      <AppPlotter />
       <AppFooter />
     </div>
   );
