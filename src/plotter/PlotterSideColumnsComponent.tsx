@@ -7,7 +7,7 @@ interface PlotterSideColumnsProps {
 
 function PlotterSideColumnsComponent({ columns }: PlotterSideColumnsProps) {
   return (
-    <div className="bg-gray-400 w-1/6 h-full border-r p-4">
+    <div className="bg-gray-400 w-full lg:w-1/4 h-full border-r p-4">
       <Droppable droppableId="columns">
         {(provided) => (
           <div
