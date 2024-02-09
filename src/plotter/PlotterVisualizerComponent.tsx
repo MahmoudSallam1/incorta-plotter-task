@@ -8,18 +8,20 @@ import {
   Legend,
 } from "recharts";
 import { DataColumn } from "../models/DataColumn";
-import { data } from "../data/data";
+import { DataItem } from "../models/DataItem";
 
 interface PlotterVisualizerProps {
   dimensions: DataColumn[];
   measures: DataColumn[];
+  data: DataItem[];
 }
 
 function PlotterVisualizerComponent({
   dimensions,
   measures,
+  data,
 }: PlotterVisualizerProps) {
-  const chartData = data[0].values.map((_, index) => {
+  const chartData = data.map((_, index) => {
     const entry = {};
     dimensions.forEach((dim) => {
       const dimData = data.find((item) => item.name === dim.name);

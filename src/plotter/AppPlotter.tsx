@@ -6,11 +6,13 @@ import PlotterDimensionComponent from "./PlotterDimensionComponent";
 import PlotterMeasureComponent from "./PlotterMeasureComponent";
 import PlotterVisualizerComponent from "./PlotterVisualizerComponent";
 import { PlotterAPI } from "../network/api/PlotterAPI";
+import { DataItem } from "../models/DataItem";
 
 function AppPlotter() {
   const [dimensions, setDimensions] = useState<DataColumn[]>([]);
   const [measures, setMeasures] = useState<DataColumn[]>([]);
   const [columns, setColumns] = useState<DataColumn[]>([]);
+  const [data, setData] = useState<DataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   const handleClearDimensions = () => {
@@ -64,6 +66,20 @@ function AppPlotter() {
       });
   }, []);
 
+  useEffect(() => {
+    PlotterAPI.listData()
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+        console.log(data);
+        
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <main className="flex flex-1 flex-col lg:flex-row">
@@ -80,6 +96,7 @@ function AppPlotter() {
           <PlotterVisualizerComponent
             dimensions={dimensions}
             measures={measures}
+            data={data}
           />
         </div>
       </main>
