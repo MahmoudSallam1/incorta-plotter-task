@@ -13,8 +13,7 @@ export class PlotterAPI {
       });
       return response;
     } catch (error) {
-      console.error("Error fetching columns:", error);
-      throw new Error("Failed to fetch columns");
+      throw new Error("Failed to fetch columns...");
     }
   }
 
@@ -27,8 +26,7 @@ export class PlotterAPI {
       });
       return response;
     } catch (error) {
-      console.error("Error fetching data:", error);
-      throw new Error("Failed to fetch data");
+      throw new Error("Failed to fetch data...");
     }
   }
 }

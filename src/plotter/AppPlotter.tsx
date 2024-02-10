@@ -64,8 +64,10 @@ function AppPlotter() {
         setLoading(false);
       })
       .catch((error) => {
-        setError("Failed to fetch columns. Please try again later.");
-        console.error("Error fetching columns:", error);
+        const errorMessage = error.message
+          ? error.message
+          : "Failed to fetch columns. Please try again later.";
+        setError(errorMessage);
         setLoading(false);
       });
   }, []);
@@ -77,8 +79,10 @@ function AppPlotter() {
         setLoading(false);
       })
       .catch((error) => {
-        setError("Failed to fetch data. Please try again later.");
-        console.error("Error fetching columns:", error);
+        const errorMessage = error.message
+          ? error.message
+          : "Failed to fetch data. Please try again later.";
+        setError(errorMessage);
         setLoading(false);
       });
   }, []);
