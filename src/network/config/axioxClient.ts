@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "https://plotter-task.herokuapp.com",
+  baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
