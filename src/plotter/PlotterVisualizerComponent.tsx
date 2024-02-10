@@ -8,19 +8,46 @@ import {
   Legend,
 } from "recharts";
 import { DataColumn } from "../models/DataColumn";
-import { DataItem } from "../models/DataItem";
+import { DataItem } from "../models/DataResponseModel";
+import { useEffect, useState } from "react";
+import { PlotterAPI } from "../network/api/PlotterAPI";
+import AppLoadingSpinner from "../components/ui/AppLoadingSpinner";
+import AppErrorCard from "../components/ui/AppErrorCard";
 
 interface PlotterVisualizerProps {
   dimensions: DataColumn[];
   measures: DataColumn[];
-  data: DataItem[];
 }
 
 function PlotterVisualizerComponent({
   dimensions,
   measures,
-  data,
 }: PlotterVisualizerProps) {
+  const [data, setData] = useState<DataItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (dimensions.length > 0 && measures.length > 0) {
+      setLoading(true);
+      PlotterAPI.getData({
+        dimension: dimensions.length > 0 ? dimensions[0].name : "",
+        measures: measures && measures.map((measure) => measure.name),
+      })
+        .then((data) => {
+          setData(data.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          const errorMessage = error.message
+            ? error.message
+            : "Failed to fetch data. Please try again later.";
+          setError(errorMessage);
+          setLoading(false);
+        });
+    }
+  }, [dimensions, measures]);
+
   const chartData = data.map((_, index) => {
     const entry = {};
     dimensions.forEach((dim) => {
@@ -39,7 +66,9 @@ function PlotterVisualizerComponent({
   });
   return (
     <div className="flex flex-col items-center w-full p-4 mb-4 overflow-x-auto">
-      {dimensions.length > 0 && measures.length > 0 && (
+      {loading && <AppLoadingSpinner />}
+      {error && <AppErrorCard message={error} />}
+      {!loading && !error && dimensions.length > 0 && measures.length > 0 && (
         <LineChart width={800} height={300} data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey={dimensions[0].name} />

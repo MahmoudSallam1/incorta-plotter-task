@@ -2,7 +2,8 @@ import { columns } from "../../data/columns";
 import { data } from "../../data/data";
 import { ColumnsResponseModel } from "../../models/ColumnsResponseModel";
 import { DataColumn } from "../../models/DataColumn";
-import { DataItem } from "../../models/DataItem";
+import { DataRequest } from "../../models/DataRequest";
+import { DataItem, DataResponseModel } from "../../models/DataResponseModel";
 import axiosClient from "../config/axioxClient";
 
 export class PlotterAPI {
@@ -32,7 +33,7 @@ export class PlotterAPI {
     }
   }
 
-  static async listColumns(): Promise<ColumnsResponseModel> {
+  static async getColumns(): Promise<ColumnsResponseModel> {
     try {
       const response = await axiosClient({
         method: "GET",
@@ -43,13 +44,14 @@ export class PlotterAPI {
       throw new Error("Failed to fetch columns...");
     }
   }
-  static async listData(): Promise<DataItem[]> {
+  static async getData(dataRequest: DataRequest): Promise<DataResponseModel> {
     try {
       const response = await axiosClient({
         method: "POST",
         url: "/data",
+        data: dataRequest,
       });
-      return response.data;
+      return response.data as DataResponseModel;
     } catch (error) {
       throw new Error("Failed to fetch data...");
     }

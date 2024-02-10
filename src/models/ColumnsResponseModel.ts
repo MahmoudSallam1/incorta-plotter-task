@@ -1,8 +1,5 @@
-export interface ColumnsResponseModel {
-  columns: Column[];
-}
+import { DataColumn } from "./DataColumn";
 
-export interface Column {
-  name: string;
-  function: string;
+export interface ColumnsResponseModel {
+  columns: DataColumn[];
 }
