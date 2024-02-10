@@ -43,13 +43,19 @@ function PlotterVisualizerComponent({
         <LineChart width={800} height={300} data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey={dimensions[0].name} />
-          <YAxis />
+          <YAxis
+            label={{
+              value: dimensions[0].name,
+              angle: -90,
+              position: "insideLeft",
+            }}
+          />
           <Tooltip />
           <Legend />
           {measures.map((measure, index) => (
             <Line
               key={index}
-              type="monotone"
+              strokeWidth={2}
               dataKey={measure.name}
               stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
             />
