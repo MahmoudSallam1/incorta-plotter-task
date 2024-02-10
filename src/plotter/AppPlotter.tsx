@@ -58,7 +58,7 @@ function AppPlotter() {
   };
 
   useEffect(() => {
-    Promise.all([PlotterAPI.listColumns(), PlotterAPI.listData()])
+    Promise.all([PlotterAPI.listMockColumns(), PlotterAPI.listMockData()])
       .then(([columnsData, data]) => {
         setColumns(columnsData);
         setData(data);
