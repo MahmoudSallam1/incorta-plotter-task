@@ -72,6 +72,9 @@ function AppPlotter() {
         setLoading(false);
       });
   }, []);
+  useEffect(() => {
+    PlotterAPI.listColumns().then((data) => console.log(data));
+  }, []);
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
