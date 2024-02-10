@@ -58,23 +58,9 @@ function AppPlotter() {
   };
 
   useEffect(() => {
-    PlotterAPI.listColumns()
-      .then((data) => {
-        setColumns(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        const errorMessage = error.message
-          ? error.message
-          : "Failed to fetch columns. Please try again later.";
-        setError(errorMessage);
-        setLoading(false);
-      });
-  }, []);
-
-  useEffect(() => {
-    PlotterAPI.listData()
-      .then((data) => {
+    Promise.all([PlotterAPI.listColumns(), PlotterAPI.listData()])
+      .then(([columnsData, data]) => {
+        setColumns(columnsData);
         setData(data);
         setLoading(false);
       })
