@@ -2,7 +2,8 @@ import { columns } from "../../data/columns";
 import { data } from "../../data/data";
 import { ColumnsResponseModel } from "../../models/ColumnsResponseModel";
 import { DataColumn } from "../../models/DataColumn";
-import { DataItem } from "../../models/DataItem";
+import { DataRequest } from "../../models/DataRequest";
+import { DataItem, DataResponseModel } from "../../models/DataResponseModel";
 import axiosClient from "../config/axioxClient";
 
 export class PlotterAPI {
@@ -32,26 +33,19 @@ export class PlotterAPI {
     }
   }
 
-  static async listColumns(): Promise<ColumnsResponseModel> {
-    try {
-      const response = await axiosClient({
-        method: "GET",
-        url: "/columns",
-      });
-      return response.data as ColumnsResponseModel;
-    } catch (error) {
-      throw new Error("Failed to fetch columns...");
-    }
+  static async getColumns(): Promise<ColumnsResponseModel> {
+    const response = await axiosClient({
+      method: "GET",
+      url: "/columns",
+    });
+    return response.data as ColumnsResponseModel;
   }
-  static async listData(): Promise<DataItem[]> {
-    try {
-      const response = await axiosClient({
-        method: "POST",
-        url: "/data",
-      });
-      return response.data;
-    } catch (error) {
-      throw new Error("Failed to fetch data...");
-    }
+  static async getData(dataRequest: DataRequest): Promise<DataResponseModel> {
+    const response = await axiosClient({
+      method: "POST",
+      url: "/data",
+      data: dataRequest,
+    });
+    return response.data as DataResponseModel;
   }
 }

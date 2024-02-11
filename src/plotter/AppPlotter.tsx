@@ -6,7 +6,6 @@ import PlotterDimensionComponent from "./PlotterDimensionComponent";
 import PlotterMeasureComponent from "./PlotterMeasureComponent";
 import PlotterVisualizerComponent from "./PlotterVisualizerComponent";
 import { PlotterAPI } from "../network/api/PlotterAPI";
-import { DataItem } from "../models/DataItem";
 import { PlotterConst } from "../constants";
 import AppErrorCard from "../components/ui/AppErrorCard";
 
@@ -14,7 +13,6 @@ function AppPlotter() {
   const [dimensions, setDimensions] = useState<DataColumn[]>([]);
   const [measures, setMeasures] = useState<DataColumn[]>([]);
   const [columns, setColumns] = useState<DataColumn[]>([]);
-  const [data, setData] = useState<DataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -58,22 +56,16 @@ function AppPlotter() {
   };
 
   useEffect(() => {
-    Promise.all([PlotterAPI.listMockColumns(), PlotterAPI.listMockData()])
-      .then(([columnsData, data]) => {
-        setColumns(columnsData);
-        setData(data);
+    PlotterAPI.getColumns()
+      .then((columnsData) => {
+        setColumns(columnsData.columns);
         setLoading(false);
       })
       .catch((error) => {
-        const errorMessage = error.message
-          ? error.message
-          : "Failed to fetch data. Please try again later.";
-        setError(errorMessage);
+        const errorMessage = "Failed to fetch columns. Please try again later.";
+        setError(errorMessage || error.message);
         setLoading(false);
       });
-  }, []);
-  useEffect(() => {
-    PlotterAPI.listColumns().then((data) => console.log(data));
   }, []);
 
   return (
@@ -94,7 +86,6 @@ function AppPlotter() {
             <PlotterVisualizerComponent
               dimensions={dimensions}
               measures={measures}
-              data={data}
             />
           </div>
         )}
