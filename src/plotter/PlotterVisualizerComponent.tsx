@@ -46,48 +46,60 @@ function PlotterVisualizerComponent({
     }
   }, [dimensions, measures]);
 
-  const chartData = data.map((_, index) => {
-    const entry = {};
-    dimensions.forEach((dim) => {
-      const dimData = data.find((item) => item.name === dim.name);
-      if (dimData) {
-        entry[dim.name] = dimData.values[index];
-      }
-    });
-    measures.forEach((measure) => {
-      const measureData = data.find((item) => item.name === measure.name);
-      if (measureData) {
-        entry[measure.name] = measureData.values[index];
-      }
-    });
-    return entry;
-  });
+  const hasData = data && data.length > 0;
+  const hasDimensions = dimensions.length > 0;
+  const hasMeasures = measures.length > 0;
+
+  const dimensionValues = hasData ? data[0]?.values : [];
+  const measureValues = hasData
+    ? data.slice(1).map((entry) => entry.values)
+    : [];
+
+  const chartData =
+    hasData && dimensionValues.length > 0
+      ? dimensionValues.map((dimValue, index) => {
+          const entry = { [data[0].name]: dimValue };
+          measureValues.forEach((measure, measureIndex) => {
+            const measureName = data[measureIndex + 1]?.name;
+            entry[measureName] = measure[index];
+          });
+          return entry;
+        })
+      : [];
   return (
     <div className="flex flex-col items-center w-full p-4 mb-4 overflow-x-auto">
       {loading && <AppLoadingSpinner />}
       {error && <AppErrorCard message={error} />}
-      {!loading && !error && dimensions.length > 0 && measures.length > 0 && (
-        <LineChart width={800} height={300} data={chartData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey={dimensions[0].name} />
-          <YAxis
-            label={{
-              value: dimensions[0].name,
-              angle: -90,
-              position: "insideLeft",
-            }}
-          />
-          <Tooltip />
-          <Legend />
-          {measures.map((measure, index) => (
-            <Line
-              key={index}
-              strokeWidth={2}
-              dataKey={measure.name}
-              stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
-            />
-          ))}
-        </LineChart>
+      {!loading && !error && hasDimensions && hasMeasures && (
+        <>
+          {hasData && dimensionValues.length > 0 ? (
+            <LineChart width={800} height={300} data={chartData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey={dimensions[0].name} />
+              <YAxis
+                label={{
+                  value: dimensions[0].name,
+                  angle: -90,
+                  position: "insideLeft",
+                }}
+              />
+              <Tooltip />
+              <Legend />
+              {measures.map((measure, index) => (
+                <Line
+                  key={index}
+                  strokeWidth={2}
+                  dataKey={measure.name}
+                  stroke={`#${Math.floor(Math.random() * 16777215).toString(
+                    16
+                  )}`}
+                />
+              ))}
+            </LineChart>
+          ) : (
+            <p>No data available</p>
+          )}
+        </>
       )}
     </div>
   );
