@@ -39,10 +39,8 @@ function PlotterVisualizerComponent({
           setLoading(false);
         })
         .catch((error) => {
-          const errorMessage = error.message
-            ? error.message
-            : "Failed to fetch data. Please try again later.";
-          setError(errorMessage);
+          const errorMessage = "Failed to fetch data. Please try again later.";
+          setError(errorMessage || error.message);
           setLoading(false);
         });
     }

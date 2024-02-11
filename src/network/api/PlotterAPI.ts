@@ -34,26 +34,18 @@ export class PlotterAPI {
   }
 
   static async getColumns(): Promise<ColumnsResponseModel> {
-    try {
-      const response = await axiosClient({
-        method: "GET",
-        url: "/columns",
-      });
-      return response.data as ColumnsResponseModel;
-    } catch (error) {
-      throw new Error("Failed to fetch columns...");
-    }
+    const response = await axiosClient({
+      method: "GET",
+      url: "/columns",
+    });
+    return response.data as ColumnsResponseModel;
   }
   static async getData(dataRequest: DataRequest): Promise<DataResponseModel> {
-    try {
-      const response = await axiosClient({
-        method: "POST",
-        url: "/data",
-        data: dataRequest,
-      });
-      return response.data as DataResponseModel;
-    } catch (error) {
-      throw new Error("Failed to fetch data...");
-    }
+    const response = await axiosClient({
+      method: "POST",
+      url: "/data",
+      data: dataRequest,
+    });
+    return response.data as DataResponseModel;
   }
 }
